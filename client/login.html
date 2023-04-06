@@ -1,0 +1,33 @@
+<!-- This is the index document for the test change it for your need -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script>
+                function getData(){
+                        const url = "http://localhost:3000/login";
+                        axios.get(url).then(data => console.log(data));
+                }
+
+                function onFormSubmit(event){
+                        event.preventDefault();
+                        getData();
+                }
+        </script>
+        <title>Login</title>
+</head>
+<body>
+        <h1>Login</h1>
+        <form onsubmit="onFormSubmit()">
+                <label for="email">email</label>
+                <input type="text" id="email">
+                <label for="password">password</label>
+                <input type="password" id="password">
+                <button type="submit">submit</button>
+        </form>
+        
+</body>
+</html>

@@ -1,0 +1,29 @@
+{
+  "name": "auth-cli",
+  "version": "1.0.0",
+  "description": "interface that can generate authentification source code",
+  "main": "bin/index.js",
+  "bin": {
+    "auth": "./bin/index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/el-hadji-mamadou-sarr/auth-cli.git"
+  },
+  "author": "elhadji & e2p",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/el-hadji-mamadou-sarr/auth-cli/issues"
+  },
+  "homepage": "https://github.com/el-hadji-mamadou-sarr/auth-cli#readme",
+  "dependencies": {
+    "boxen": "^7.0.2",
+    "express": "^4.18.2",
+    "nodemon": "^2.0.22",
+    "yargs": "^17.7.1"
+  }
+}
