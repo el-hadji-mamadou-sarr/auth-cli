@@ -7,21 +7,41 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script>
-                function getData(){
+                function postData(user){
                         const url = "http://localhost:3000/login";
-                        axios.get(url).then(data => console.log(data));
+                        /* const formData = new FormData();
+                        formData.append('email', user.email); */
+                        const requestBody = {
+                                method: "POST",
+                                Headers : {
+                                        'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(user)
+                        }
+                        fetch(url, requestBody).then(res=>res.json()).then(res=>console.log(res));
                 }
 
                 function onFormSubmit(event){
                         event.preventDefault();
-                        getData();
+                        const user = {};
+                        const errorMessage = "You need to enter email and password";
+                        const email = document.getElementById("email").value;
+                        const password = document.getElementById("password").value;
+                        if(!email || !password){
+                                document.getElementById("error").textContent = errorMessage;
+                        }else{
+                                user.email = email;
+                                user.password = password;
+                                postData(user);
+                        }
                 }
         </script>
         <title>Login</title>
 </head>
 <body>
         <h1>Login</h1>
-        <form onsubmit="onFormSubmit()">
+        <p id="error"></p>
+        <form onsubmit="onFormSubmit(event)">
                 <label for="email">email</label>
                 <input type="text" id="email">
                 <label for="password">password</label>

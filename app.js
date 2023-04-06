@@ -6,9 +6,11 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
+app.use(express.json()); 
 
-app.get('/login', (req,res)=>{
-   res.json({message:"login"});     
+app.post('/login', (req, res)=>{
+       console.log(req.body)
+        res.json({message: "success"});
 })
 
 app.listen(3000, ()=>{
