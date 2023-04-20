@@ -9,15 +9,22 @@
         <script>
                 function postData(user){
                         const url = "http://localhost:3000/login";
-                        /* const formData = new FormData();
-                        formData.append('email', user.email); */
+                        const formData = new FormData();
+                        formData.append('email', user.email);
+                        console.log(user);
                         const requestBody = {
                                 method: "POST",
-                                Headers : {
+                                headers : {
+                                        Accept: 'application/json',
                                         'Content-Type': 'application/json'
-                                },
-                                body: JSON.stringify(user)
+                                }, 
+                                body: JSON.stringify({
+                                        email: user.email,
+                                        password: user.password
+                                })
+                                
                         }
+                
                         fetch(url, requestBody).then(res=>res.json()).then(res=>console.log(res));
                 }
 
