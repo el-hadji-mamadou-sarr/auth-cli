@@ -8,4 +8,3 @@ The user can also decide about the authentification strategies (cookie or token 
 
 - Node 
 - React
-- python
