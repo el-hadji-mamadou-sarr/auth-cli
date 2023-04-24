@@ -28,8 +28,4 @@ const authenticateUser = async(email, password, done)=>{
         
 }
 
-passport.use(
-        new LocalStrategy( {usernameField: 'email'},
-        authenticateUser
-        )
-)
+passport.use( new LocalStrategy( {usernameField: 'email'}, authenticateUser))

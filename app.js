@@ -30,7 +30,8 @@ require('./passport')
 app.post('/login', (req, res, next)=>{
 
         //authenticate the user using the local strategy
-        passport.authenticate('local', (err, user, info)=>{
+        passport.authenticate('local', async(err, user, info)=>{
+                console.log(user);
                 if(err || !user){
                         return res.status(403)
                                 .json({message:"invallid email or password"})
