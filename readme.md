@@ -7,4 +7,12 @@ The user can also decide about the authentification strategies (cookie or token 
 ## Stack
 
 - Node 
-- React
+- Express
+
+### local strategie
+
+use it to authenticate users using username and password
+
+### jwt strategie
+
+authenticate endpoints using jwt.

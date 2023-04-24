@@ -10,8 +10,6 @@
                 function postData(user){
                         const url = "http://localhost:3000/login";
                         const formData = new FormData();
-                        formData.append('email', user.email);
-                        console.log(user);
                         const requestBody = {
                                 method: "POST",
                                 headers : {

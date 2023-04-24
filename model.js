@@ -1,10 +1,12 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 const {Schema} = mongoose;
 
 const userSchema = new Schema({
         email:String,
         password:String
-});
+        }   
+);
 
 const userModel = mongoose.model('users', userSchema);
 userModel.createCollection().then((collection)=>{
