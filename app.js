@@ -27,24 +27,29 @@ db.once('open', (open)=>console.log('connected to database'));
 
 //the authentification prosess
 require('./passport')
-app.post('/login', (req, res, next)=>{
+app.post('/login', async(req, res, next)=>{
 
         //authenticate the user using the local strategy
         passport.authenticate('local', async(err, user, info)=>{
-                console.log(user);
+                
+                //if the last middleware generate an error or the email or password is invalid
                 if(err || !user){
                         return res.status(403)
                                 .json({message:"invallid email or password"})
                 }
 
                 //if the authentification succeed we need to logged the user. the req.login establish
-                //a session for the user.
+                //a session for the user. So here we use a jwt token so the the session is false
                 req.login(user, {session:false}, (err)=>{
+
+                        //if the login didnt work we send an error
                         if(err){
                                 res.send(err);
                         }
-                        const token = jwt.sign(user, process.env.JWT_SECRET);
-                        return res.json({user, token});
+
+                        //if the login pass we generate a token to the client
+                        const token = jwt.sign({_id:user.id, email:user.email}, process.env.JWT_SECRET);
+                        return res.json({token:token});
                 });
 
                 //then we need to call the self invoking function with the req, res, next params.
