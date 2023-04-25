@@ -15,15 +15,21 @@
                                 headers : {
                                         Accept: 'application/json',
                                         'Content-Type': 'application/json'
+                                        
                                 }, 
                                 body: JSON.stringify({
                                         email: user.email,
                                         password: user.password
-                                })
-                                
+                                })       
                         }
-                
-                        fetch(url, requestBody).then(res=>res.json()).then(res=>console.log(res));
+                        fetch(url, requestBody).then((res)=>{
+                               console.log(res);
+                        
+                        }).catch((err)=>{
+                                console.log(err);
+                        })
+
+                        
                 }
 
                 function onFormSubmit(event){

@@ -2,11 +2,12 @@ const { log } = require('console');
 const express = require('express');
 const app = express();
 const fs = require('fs');
-
+const cors = require('cors');
 const login = fs.readFileSync('./client/login.html');
 const register = fs.readFileSync('./client/register.html');
 const index = fs.readFileSync('./client/index.html');
 
+app.use(cors());
 app.get('/login', (req, res)=>{
         res.end(login);
 })

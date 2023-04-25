@@ -28,7 +28,11 @@ db.once('open', (open)=>console.log('connected to database'));
 //the authentification prosess
 require('./passport')
 app.post('/login', async(req, res, next)=>{
+        //then we need to call the self invoking function with the req, res, next params.
+        authentification(req, res, next)
+})
 
+const authentification = (req, res, next)=>{
         //authenticate the user using the local strategy
         passport.authenticate('local', async(err, user, info)=>{
                 
@@ -52,22 +56,32 @@ app.post('/login', async(req, res, next)=>{
 
                         //the token is stored in the response header cookie.
                         //So every time the client want to do a request he can use the cookie
+                        
                         res.cookie('jwtToken', token, {
                                 httpOnly: true,
                                 secure: false, //we using http in our app (not recommanded)
-                                maxAge: 60*60*1000 //the expiration of the cookie (1h)
+                                maxAge: 60*60*1000, //the expiration of the cookie (1h)
+
                         })
+                        /* .set('Content-Type:', 'text/html; charset=utf-8') */
                         .status(200)
-                        .json({message: "login successfylly"})
+                        .json({_id:user.id, email:user.email})
                         
                 });
 
-        //then we need to call the self invoking function with the req, res, next params.
+        
         })(req, res, next)
-})
+}
 
-app.post('/register', (req, res)=>{
+app.post('/register', async(req, res, next)=>{
 
+        const user = await userModel.findOne({email:req.body.email});
+        if(user){
+                res.status(409)
+                .json({message:"this user already exist"});
+        }
+        const newUser = await userModel.create({email:req.body.email, password: await bcrypt.hash(req.body.password,10)});
+        authentification(req, res, next);
 })
 
 app.get('/secureRoute', (req, res)=>{
@@ -82,8 +96,6 @@ const addUser = async()=>{
 }
 
 
-
-
-app.listen(3000, ()=>{
-        console.log("server started at port 3000");
+app.listen(5000, ()=>{
+        console.log("server started at port 5000");
 })
