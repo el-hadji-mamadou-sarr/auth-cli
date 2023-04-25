@@ -48,12 +48,21 @@ app.post('/login', async(req, res, next)=>{
                         }
 
                         //if the login pass we generate a token to the client
-                        const token = jwt.sign({_id:user.id, email:user.email}, process.env.JWT_SECRET);
-                        return res.json({token:token});
+                        const token = jwt.sign({_id:user.id, email:user.email}, process.env.JWT_SECRET,{expiresIn:'1h'});
+
+                        //the token is stored in the response header cookie.
+                        //So every time the client want to do a request he can use the cookie
+                        res.cookie('jwtToken', token, {
+                                httpOnly: true,
+                                secure: false, //we using http in our app (not recommanded)
+                                maxAge: 60*60*1000 //the expiration of the cookie (1h)
+                        })
+                        .status(200)
+                        .json({message: "login successfylly"})
+                        
                 });
 
-                //then we need to call the self invoking function with the req, res, next params.
-
+        //then we need to call the self invoking function with the req, res, next params.
         })(req, res, next)
 })
 
