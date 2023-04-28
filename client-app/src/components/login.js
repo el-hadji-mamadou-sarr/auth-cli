@@ -23,7 +23,6 @@ export const Login = ()=>{
                         if(res.status === 200){
                                 res.json().then((res)=>{
                                         navigate('/home');
-                                        console.log(res);
 
                                 })
                         }
