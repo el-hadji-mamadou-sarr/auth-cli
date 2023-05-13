@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 
-export const Home = ()=>{
-        const navigate = useNavigate();
+export const Profile = ()=>{
         const [profile, setProfile] = useState({});
 
-
+        const requestBody = {
+                method: "GET", 
+                credentials: "include", 
+                headers : {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                } 
+        }
 
         useEffect(()=>{
-                const requestBody = {
-                        method: 'GET', 
-                        credentials: 'include', 
-                }
                 fetch("http://localhost:5000/api/users/profile", requestBody)
                 .then((res)=>{
                         if(res.status === 200){
@@ -23,10 +24,11 @@ export const Home = ()=>{
                 })
         },[])
 
-        return (
-                <>
-                        <h1>Welcome to home</h1>
-                        <button onClick={()=>navigate('/profile')}>go to profile</button>
-                </>
-        );
+ return (
+        <>
+                <span>fullname:{profile.fullname}</span>
+                <span>email:{profile.email}</span>
+                <span>banner_color:{profile.banner_color}</span>
+        </>
+ );       
 }

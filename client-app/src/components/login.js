@@ -7,7 +7,8 @@ export const Login = ()=>{
         const handleSubmit = (e)=>{
                 e.preventDefault();
                 const requestBody = {
-                        method: "POST",
+                        method: 'POST',
+                        credentials: 'include',
                         headers : {
                                 Accept: 'application/json',
                                 'Content-Type': 'application/json'
@@ -18,7 +19,7 @@ export const Login = ()=>{
                                 password: userValue.password
                         })       
                 }
-                fetch("http://localhost:5000/login", requestBody)
+                fetch("http://localhost:5000/api/auth/login", requestBody)
                 .then((res)=>{
                         if(res.status === 200){
                                 res.json().then((res)=>{
