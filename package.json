@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/el-hadji-mamadou-sarr/auth-cli#readme",
   "dependencies": {
-    "bcrypt": "^5.1.0",
+    "bcrypt": "^6.0.0",
     "body-parser": "^1.20.2",
     "boxen": "^7.0.2",
     "cors": "^2.8.5",
